@@ -1,0 +1,397 @@
+/* Standard page layout */
+*
+{
+    box-sizing: border-box;
+}
+
+/* Changing the basic body strucutre i.e, these changes would be applied to the wholem web page. */
+body
+{
+    margin: 0;
+    background-color: #edf2f4;
+    color: #24343b;
+    font-family: Arial, sans-serif;
+}
+
+/* Header and footer alignmnet and size definition */
+header, footer
+{
+    text-align: center;
+    padding: 20px;
+}
+
+h1
+{
+    margin-bottom: 10px;
+}
+
+main
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 20px;
+}
+
+/* Each section contains one animation , heading and a para as an explantion */
+section
+{
+    width: 360px;
+    max-width: 100%;
+    padding: 16px;
+    border: 1px solid #c5d3d9;
+    border-radius: 8px;
+    background-color: white;
+}
+
+h2
+{
+    margin: 0 0 16px;
+    font-size: 20px;
+}
+
+section p
+{
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.scene
+{
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+    background-color: #e2f0f3;
+}
+
+.centre
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The bottom border acts as the ground. */
+.landscape
+{
+    background-color: #00859e;
+    border-bottom: 60px solid #477b65;
+}
+
+/* Pacman: two semicircles with moving food */
+.pacman
+{
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 80px;
+    height: 80px;
+}
+
+.upper-mouth, .lower-mouth
+{
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background-color: #eeeeee;
+}
+
+.upper-mouth
+{
+    top: 0;
+    border-radius: 40px 40px 0 0;
+    transform-origin: center bottom;
+    animation: open-top 0.5s ease-in-out infinite alternate;
+}
+
+.lower-mouth
+{
+    bottom: 0;
+    border-radius: 0 0 40px 40px;
+    transform-origin: center top;
+    animation: open-bottom 0.5s ease-in-out infinite alternate;
+}
+
+.eye
+{
+    position: absolute;
+    top: 15px;
+    left: 43px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: #292929;
+}
+
+.food
+{
+    position: absolute;
+    /* Food away from our pacman! */
+    left: calc(25% + 80px); 
+    bottom: 34px;
+    display: flex;
+    gap: 28px;
+    animation: move-food 0.5s linear infinite;
+}
+
+.food span
+{
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #292929;
+}
+
+/* Keyframes allow us to make our cusotmized animations using translate , transform and other similar properties! */
+@keyframes open-top
+{
+    from
+    {
+        transform: rotate(0deg);
+    }
+    to
+    {
+        transform: rotate(-30deg);
+    }
+}
+
+@keyframes open-bottom
+{
+    from
+    {
+        transform: rotate(0deg);
+    }
+    to
+    {
+        transform: rotate(30deg);
+    }
+}
+
+@keyframes move-food
+{
+    to
+    {
+        transform: translateX(-40px);
+    }
+}
+
+/* 2. Move right to left while bouncing at variable speed. */
+.ball
+{
+    position: absolute;
+    left: 100%;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #eeeeee;
+    border-radius: 50%;
+    animation: move-ball 3s ease-out infinite, bounce 3s infinite;
+}
+
+/* Both endpoints are outside the scene, hiding the reset. */
+@keyframes move-ball
+{
+    from
+    {
+        left: 100%;
+    }
+    to
+    {
+        left: -40px;
+    }
+}
+
+@keyframes bounce
+{
+    /* Start at the highest point. */
+    0%
+    {
+        transform: translateY(0);
+        animation-timing-function: ease-in;
+    }
+
+    /* Hit the ground after each bounce. */
+    20%, 52%, 76%
+    {
+        transform: translateY(130px);
+        animation-timing-function: ease-out;
+    }
+
+    /* First bounce: return to a lower height. */
+    36%
+    {
+        transform: translateY(45px);
+        animation-timing-function: ease-in;
+    }
+
+    /* Second bounce: even lower. */
+    64%
+    {
+        transform: translateY(80px);
+        animation-timing-function: ease-in;
+    }
+
+    /* Third bounce: a small hop. */
+    84%
+    {
+        transform: translateY(105px);
+        animation-timing-function: ease-in;
+    }
+
+    /* Settle on the ground before the animation repeats. */
+    92%, 100%
+    {
+        transform: translateY(130px);
+    }
+}
+
+/* 3. Windmill */
+.stand
+{
+    position: absolute;
+    width: 12px;
+    height: 120px;
+    left: calc(50% - 6px);
+    top: 100px;
+    background-color: #6f4444;
+}
+
+.windmill
+{
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    left: calc(50% - 65px);
+    top: 35px;
+    animation: spin 4s linear infinite;
+}
+
+.blade
+{
+    position: absolute;
+    background-color: #00859e;
+    border-radius: 8px;
+}
+
+.horizontal
+{
+    width: 130px;
+    height: 24px;
+    top: 53px;
+}
+
+.vertical
+{
+    width: 24px;
+    height: 130px;
+    left: 53px;
+}
+
+.hub
+{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 53px;
+    left: 53px;
+    border-radius: 50%;
+    background-color: #f2b544;
+}
+
+/* 4. The spinner reuses the rotation keyframes. */
+.spinner
+{
+    width: 70px;
+    height: 70px;
+    border: 8px solid #bfd7de;
+    border-top-color: #00859e;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin
+{
+    to
+    {
+        transform: rotate(360deg);
+    }
+}
+
+/* 5. Each dot starts a little later than the previous one. */
+.dots
+{
+    gap: 15px;
+}
+
+.dots span
+{
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #00859e;
+    animation: jump 1.2s ease-in-out infinite;
+}
+
+.dots span:nth-child(2)
+{
+    animation-delay: 0.2s;
+}
+
+.dots span:nth-child(3)
+{
+    animation-delay: 0.4s;
+}
+
+@keyframes jump
+{
+    0%, 60%, 100%
+    {
+        transform: translateY(0);
+    }
+    30%
+    {
+        transform: translateY(-30px);
+    }
+}
+
+/* 6. Text colour and size changes using animations */
+.colour-text
+{
+    font-size: 28px;
+    animation: change-text 3s ease-in-out infinite;
+}
+
+@keyframes change-text
+{
+    0%, 100%
+    {
+        color: #006c80;
+        transform: scale(1);
+    }
+    50%
+    {
+        color: #a32c66;
+        transform: scale(1.15);
+    }
+}
+
+/* 7. A transition runs when the button is hovered or focused. */
+.hover-button
+{
+    padding: 15px 24px;
+    border: none;
+    border-radius: 6px;
+    background-color: #00859e;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.hover-button:hover, .hover-button:focus-visible
+{
+    background-color: #684292;
+    transform: scale(1.1) rotate(-5deg);
+}
